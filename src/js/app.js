@@ -24,16 +24,17 @@ class Team {
  покрытие функций и классов, которые вы тестируете.
  */
 import Character from './Character.js';
-
+// создаем массив для хранения героев
 const cheracterList = [];
+// Создаем мага и хоббита
 const mag = new Character('pendalf', 13);
 const hobit = new Character('frodo', 1);
-
+// Помещаем созданных героев в массив
 cheracterList.push(mag);
 cheracterList.push(hobit);
 cheracterList.push(hobit);
 
-console.log(cheracterList);
+console.log('Массив созданных героев', cheracterList);
 
 export default class Team {
   constructor() {
@@ -42,7 +43,7 @@ export default class Team {
 
   add(cheracter) {
     if (this.members.has(cheracter)) {
-      console.log('err - such a character already exists');
+      throw new Error('err - such a character already exists');
     } else {
       this.members.add(cheracter);
     }
@@ -64,6 +65,9 @@ export default class Team {
 }
 
 const team = new Team();
+
 team.add(mag);
+// Повторное добавление мага сгенерирует ошибку
+// team.add(mag); // 'err - such a character already exists'
 team.addAll(cheracterList);
 team.toArray();

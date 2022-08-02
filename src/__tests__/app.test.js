@@ -6,10 +6,19 @@ test('should add new Character', () => {
   const dog = new Character('barbos', 3);
   team1.add(dog);
 
-  // let result = {level: 3, name: 'barbos'}
-  /* не могу разобраться как писать проверку:
-  хочу проверить, что time1 содержит result
-  */
-  //  expect(team1).toHaveProperty(result);
-  //  expect(team1).toMatchObject(result);
+  const result = { level: 3, name: 'barbos' };
+  // Проверяем что массивы сходятся
+  expect(team1.toArray()).toEqual([result]);
+  // Проверяем что в массиве есть нужное значение
+  expect(team1.toArray()).toContainEqual(result);
+  // Проверяем что members содержит объект который мы передали в team1
+  expect(team1.members.has(dog)).toBeTruthy();
+});
+
+test('should throw error', () => {
+  const team1 = new Team();
+  const dog = new Character('barbos', 3);
+  team1.add(dog);
+
+  expect(() => team1.add(dog)).toThrow(Error);
 });
